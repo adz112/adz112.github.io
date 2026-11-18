@@ -378,3 +378,536 @@ a:hover {
   background-color: rgba(57, 255, 20, 0.15);
   color: #ffffff;
 }
+
+
+
+.kanban {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+    align-items: start;
+}
+
+.kanban-column {
+    background: var(--surface-color);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-top: none;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+    position: relative;
+    overflow: hidden;
+}
+
+.kanban-column::before {
+    content: "";
+    position: absolute;
+    height: 5px;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.kanban-column.planuojama::before {
+    background: #ff9f43;
+}
+
+.kanban-column.mokomasi::before {
+    background: #4dabf7;
+}
+
+.kanban-column.atlikta::before {
+    background: #51cf66;
+}
+
+.kanban-column h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    padding: 8px 0 18px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.kanban-column.planuojama h3 i {
+    color: #ff9f43;
+}
+
+.kanban-column.mokomasi h3 i {
+    color: #4dabf7;
+}
+
+.kanban-column.atlikta h3 i {
+    color: #51cf66;
+}
+
+.skill-card {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 12px;
+    align-items: center;
+    background: rgba(27,42,51,0.85);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 13px;
+    padding: 16px 13px;
+    margin-bottom: 14px;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: scale(1.025);
+    background: #243944;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.skill-card > i {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 11px;
+    background: rgba(255,255,255,0.08);
+    color: var(--accent-color);
+    font-size: 1.5rem;
+}
+
+.skill-card h4 {
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.skill-status,
+.skill-xp {
+    display: inline-block;
+    font-size: 0.73rem;
+    padding: 5px 8px;
+    border-radius: 5px;
+    margin: 2px 3px 0 0;
+}
+
+.skill-status {
+    background: rgba(255,255,255,0.09);
+    color: #e7f2f7;
+}
+
+.skill-xp {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+    font-weight: 700;
+}
+
+.xp-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.xp-box {
+    min-height: 125px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--surface-color);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.xp-box::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    right: -25px;
+    bottom: -30px;
+    border: 2px solid rgba(245,179,1,0.15);
+    border-radius: 50%;
+}
+
+.xp-box:hover {
+    transform: translateY(-7px);
+    border-color: var(--accent-color);
+}
+
+.xp-box i {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+}
+
+.xp-box span {
+    display: block;
+    font-size: 0.8rem;
+    color: #b8c7cf;
+    margin-bottom: 7px;
+}
+
+.xp-box strong {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.xp-progress {
+    margin-top: 30px;
+    padding: 25px;
+    background: var(--surface-color);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.xp-progress p {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.xp-bar {
+    height: 17px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff9f43, var(--accent-color));
+    border-radius: 20px;
+    color: transparent;
+    font-size: 0;
+    animation: xpLoading 1.8s ease;
+    position: relative;
+}
+
+.xp-bar-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        transparent 25%,
+        rgba(255,255,255,0.35) 50%,
+        transparent 75%
+    );
+    animation: blizgesys 2.5s infinite;
+}
+
+@keyframes xpLoading {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes blizgesys {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.skill-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 22px;
+}
+
+.skill-stats .stat {
+    background: var(--surface-color);
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.07);
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+}
+
+.skill-stats .stat:hover {
+    transform: translateY(-4px);
+}
+
+.skill-stats .stat i {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 8px;
+}
+
+.skill-stats .stat strong {
+    display: block;
+    color: #ffffff;
+    font-size: 1.3rem;
+    margin-top: 5px;
+}
+
+@media (max-width: 992px) {
+    .kanban {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .xp-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .kanban,
+    .xp-info,
+    .skill-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .xp-box {
+        min-height: 100px;
+    }
+}
+
+.services.section {
+    background: linear-gradient(-45deg, #101a20, #2b2205, #0d2a36, #101a20);
+    background-size: 400% 400%;
+    animation: gradientas 12s ease infinite;
+}
+
+@keyframes gradientas {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.about.section {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-shapes .shape {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.about .container {
+    position: relative;
+    z-index: 1;
+}
+
+.shape.circle {
+    top: 120px;
+    left: 4%;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 6px solid var(--accent-color);
+    animation: kilimas 5s ease-in-out infinite;
+}
+
+.shape.triangle {
+    top: 60%;
+    right: 4%;
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 70px solid #4dabf7;
+    animation: sukimasis 12s linear infinite;
+}
+
+.shape.square {
+    bottom: 60px;
+    left: 45%;
+    width: 50px;
+    height: 50px;
+    background: #ff7a00;
+    border-radius: 8px;
+    animation: didejimas 4s ease-in-out infinite;
+}
+
+@keyframes kilimas {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-25px);
+    }
+}
+
+@keyframes sukimasis {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes didejimas {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+.about.section {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-shapes {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.about-shapes .shape {
+    position: absolute;
+    display: block;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.about .container {
+    position: relative;
+    z-index: 2;
+}
+
+.about-shapes .circle {
+    top: 15%;
+    left: 5%;
+    width: 75px;
+    height: 75px;
+    border: 5px solid #39ff14;
+    border-radius: 50%;
+    animation: kilimas 4s ease-in-out infinite;
+}
+
+.about-shapes .triangle {
+    top: 55%;
+    right: 7%;
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 70px solid #4dabf7;
+    animation: sukimasis 7s linear infinite;
+}
+
+.about-shapes .square {
+    bottom: 10%;
+    left: 48%;
+    width: 55px;
+    height: 55px;
+    background: #ff7a00;
+    border-radius: 8px;
+    animation: didejimas 3s ease-in-out infinite;
+}
+
+@keyframes kilimas {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-45px);
+    }
+}
+
+@keyframes sukimasis {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes didejimas {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+}
+.contact .contact-form label {
+display: block;
+min-height: 3em;
+margin-bottom: 6px;
+font-size: 0.9rem;
+color: #d3e1e8;
+}
+
+.contact .contact-form .btn {
+background-color: var(--accent-color);
+color: var(--contrast-color);
+font-weight: 700;
+margin: 0 6px;
+}
+
+.contact .contact-form .btn:hover {
+background-color: var(--accent-dark);
+}
+
+.contact .contact-form .btn:disabled {
+opacity: 0.4;
+cursor: not-allowed;
+}
+
+.contact .contact-form .btn-isvalyti {
+background-color: transparent;
+color: var(--accent-color);
+border: 2px solid var(--accent-color);
+}
+
+.contact .contact-form .btn-isvalyti:hover {
+background-color: rgba(245, 179, 1, 0.15);
+}
+
+/* 4 – rezultatas */
+#formos-rezultatas {
+margin-top: 24px;
+}
+
+#formos-rezultatas p {
+margin-bottom: 4px;
+}
+
+#formos-rezultatas .vidurkis {
+margin-top: 12px;
+font-weight: 700;
+color: var(--accent-color);
+}
+
+/* PAPILDOMA 1 – klaidos */
+.contact .contact-form .form-control.neteisingas {
+border-color: #ff6b6b;
+}
+
+.klaida-tekstas {
+min-height: 1.2em;
+margin-top: 4px;
+font-size: 0.85rem;
+color: #ff6b6b;
+}
